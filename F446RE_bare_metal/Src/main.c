@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "gpio.h"
 #include "usart.h"
 #include "adc.h"
@@ -21,5 +22,6 @@ int main(void)
 		program_state_display(&program_state);
 		adc_sample_signal(buffer, &program_state);
 		adc_value = *buffer;
+
 	}
 }

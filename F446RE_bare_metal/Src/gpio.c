@@ -5,8 +5,6 @@
  *      Author: prate
  */
 
-#ifndef GPIO_C_
-#define GPIO_C_
 
 #include "gpio.h"
 
@@ -61,10 +59,11 @@ void gpio_init(void){
 	GPIOA_MODER &= ~(1U << 20);
 
 	//Set alternative functions for USART AF7 for PA9 and PA10
-	GPIOA_AFRH |= (7U << 4);
-	GPIOA_AFRH &= ~(1U << 7);
-	GPIOA_AFRH |= (7U << 8);
-	GPIOA_AFRH &= ~(1U << 11);
+	GPIOA_AFRH &= ~(0xF << 4);   // clear PA9 AF
+	GPIOA_AFRH |=  (7U << 4);    // set AF7 for PA9
+
+	GPIOA_AFRH &= ~(0xF << 8);   // clear PA10 AF
+	GPIOA_AFRH |=  (7U << 8);    // set AF7 for PA10
 
 	//Set GPIOA1 to analog for ADC
 	GPIOA_MODER |= (3U << 2);
@@ -135,6 +134,3 @@ void led_delay(void){
 
 	for(int i = 0; i < 150000; i++);
 }
-
-
-#endif /* GPIO_C_ */
